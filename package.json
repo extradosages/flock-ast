@@ -4,6 +4,8 @@
     "name": "extradosages"
   },
   "dependencies": {
+    "@types/uuid": "^9.0.8",
+    "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -15,7 +17,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   },
-  "exports": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./id": "./dist/nodes/id.js"
+  },
   "license": "MIT",
   "name": "@flock/ast",
   "types": "./dist/index.d.ts",
