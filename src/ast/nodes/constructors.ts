@@ -1,88 +1,130 @@
 import { id } from "./id";
 import {
-    AstNode,
-    AstNodeData,
     AstNodeRef,
     AstNodeTypeUnknown,
+    AstNodeUnknown,
+    BooleanTermLiteralAstNode,
+    BooleanTypeLiteralAstNode,
+    ClientImplementationAstNode,
+    FloatTermLiteralAstNode,
+    FloatTypeLiteralAstNode,
+    FunctionTermEliminatorAstNode,
+    FunctionTypeAstNode,
+    GenericTypeConstructorAstNode,
+    GenericTypeEliminatorAstNode,
+    IntegerTermLiteralAstNode,
+    IntegerTypeLiteralAstNode,
+    LambdaConstructorAstNode,
+    LargeTypeTypeLiteralAstNode,
+    LibraryAstNode,
+    ProductTermConstructorAstNode,
+    ProductTermEliminatorAstNode,
+    ProductTypeAstNode,
+    StringTermLiteralAstNode,
+    StringTypeLiteralAstNode,
+    SumTermConstructorAstNode,
+    SumTermEliminatorAstNode,
+    SumTypeAstNode,
+    TermBindingAstNode,
+    TermDefinitionAstNode,
+    TermReferenceAstNode,
+    TypeBindingAstNode,
+    NormalizedTypeDefinitionAstNode,
+    TypeReferenceAstNode,
 } from "./parsers";
 
 const astNodeConstructor =
-    <AstNodeType extends AstNodeTypeUnknown>(nodeType: AstNodeType) =>
-    (data: AstNodeData<AstNodeType>): AstNode<AstNodeType> => ({
-        data,
-        id: id(),
-        type: nodeType,
-    });
+    <AstNode extends AstNodeUnknown>(nodeType: AstNode["type"]) =>
+    (data: AstNode["data"]): AstNode =>
+        ({
+            data,
+            id: id(),
+            type: nodeType,
+        }) as AstNode;
 
 export const astNodeRef = <AstNodeType extends AstNodeTypeUnknown>(
     nodeType: AstNodeType,
     id: string,
 ): AstNodeRef<AstNodeType> => ({ id, type: nodeType });
 
-export const booleanTypeLiteral = astNodeConstructor("booleanTypeLiteral");
+export const booleanTypeLiteral =
+    astNodeConstructor<BooleanTypeLiteralAstNode>("booleanTypeLiteral");
 
-export const floatTypeLiteral = astNodeConstructor("floatTypeLiteral");
+export const floatTypeLiteral =
+    astNodeConstructor<FloatTypeLiteralAstNode>("floatTypeLiteral");
 
-export const integerTypeLiteral = astNodeConstructor("integerTypeLiteral");
+export const integerTypeLiteral =
+    astNodeConstructor<IntegerTypeLiteralAstNode>("integerTypeLiteral");
 
-export const stringTypeLiteral = astNodeConstructor("stringTypeLiteral");
+export const stringTypeLiteral =
+    astNodeConstructor<StringTypeLiteralAstNode>("stringTypeLiteral");
 
-export const largeTypeTypeLiteral = astNodeConstructor("largeTypeTypeLiteral");
+export const largeTypeTypeLiteral =
+    astNodeConstructor<LargeTypeTypeLiteralAstNode>("largeTypeTypeLiteral");
 
-export const unsafeTypeBinding = astNodeConstructor("typeBinding");
+export const unsafeTypeBinding =
+    astNodeConstructor<TypeBindingAstNode>("typeBinding");
 
-export const unsafeTypeReference = astNodeConstructor("typeReference");
+export const unsafeTypeReference =
+    astNodeConstructor<TypeReferenceAstNode>("typeReference");
 
-export const productType = astNodeConstructor("productType");
+export const productType =
+    astNodeConstructor<ProductTypeAstNode>("productType");
 
-export const sumType = astNodeConstructor("sumType");
+export const sumType = astNodeConstructor<SumTypeAstNode>("sumType");
 
-export const functionType = astNodeConstructor("functionType");
+export const functionType =
+    astNodeConstructor<FunctionTypeAstNode>("functionType");
 
-export const genericTypeConstructor = astNodeConstructor(
-    "genericTypeConstructor",
-);
+export const genericTypeConstructor =
+    astNodeConstructor<GenericTypeConstructorAstNode>("genericTypeConstructor");
 
-export const genericTypeEliminator = astNodeConstructor(
-    "genericTypeEliminator",
-);
+export const genericTypeEliminator =
+    astNodeConstructor<GenericTypeEliminatorAstNode>("genericTypeEliminator");
 
-export const booleanTermLiteral = astNodeConstructor("booleanTermLiteral");
+export const booleanTermLiteral =
+    astNodeConstructor<BooleanTermLiteralAstNode>("booleanTermLiteral");
 
-export const floatTermLiteral = astNodeConstructor("floatTermLiteral");
+export const floatTermLiteral =
+    astNodeConstructor<FloatTermLiteralAstNode>("floatTermLiteral");
 
 export const unsafeIntegerTermLiteral =
-    astNodeConstructor("integerTermLiteral");
+    astNodeConstructor<IntegerTermLiteralAstNode>("integerTermLiteral");
 
-export const stringTermLiteral = astNodeConstructor("stringTermLiteral");
+export const stringTermLiteral =
+    astNodeConstructor<StringTermLiteralAstNode>("stringTermLiteral");
 
-export const clientImplementation = astNodeConstructor("clientImplementation");
+export const clientImplementation =
+    astNodeConstructor<ClientImplementationAstNode>("clientImplementation");
 
-export const unsafeTermBinding = astNodeConstructor("termBinding");
+export const unsafeTermBinding =
+    astNodeConstructor<TermBindingAstNode>("termBinding");
 
-export const unsafeTermReference = astNodeConstructor("termReference");
+export const unsafeTermReference =
+    astNodeConstructor<TermReferenceAstNode>("termReference");
 
-export const productTermConstructor = astNodeConstructor(
-    "productTermConstructor",
-);
+export const productTermConstructor =
+    astNodeConstructor<ProductTermConstructorAstNode>("productTermConstructor");
 
-export const unsafeProductTermEliminator = astNodeConstructor(
-    "productTermEliminator",
-);
+export const unsafeProductTermEliminator =
+    astNodeConstructor<ProductTermEliminatorAstNode>("productTermEliminator");
 
 export const unsafeSumTermConstructor =
-    astNodeConstructor("sumTermConstructor");
+    astNodeConstructor<SumTermConstructorAstNode>("sumTermConstructor");
 
-export const sumTermEliminator = astNodeConstructor("sumTermEliminator");
+export const sumTermEliminator =
+    astNodeConstructor<SumTermEliminatorAstNode>("sumTermEliminator");
 
-export const lambdaConstructor = astNodeConstructor("lambdaConstructor");
+export const lambdaConstructor =
+    astNodeConstructor<LambdaConstructorAstNode>("lambdaConstructor");
 
-export const functionTermEliminator = astNodeConstructor(
-    "functionTermEliminator",
-);
+export const functionTermEliminator =
+    astNodeConstructor<FunctionTermEliminatorAstNode>("functionTermEliminator");
 
-export const termDefinition = astNodeConstructor("termDefinition");
+export const termDefinition =
+    astNodeConstructor<TermDefinitionAstNode>("termDefinition");
 
-export const typeDefinition = astNodeConstructor("typeDefinition");
+export const typeDefinition =
+    astNodeConstructor<NormalizedTypeDefinitionAstNode>("typeDefinition");
 
-export const library = astNodeConstructor("library");
+export const library = astNodeConstructor<LibraryAstNode>("library");

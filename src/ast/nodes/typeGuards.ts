@@ -27,8 +27,8 @@ import {
     lambdaConstructorAstNodeParser,
     TermDefinitionAstNode,
     termDefinitionAstNodeParser,
-    TypeDefinitionAstNode,
-    typeDefinitionAstNodeParser,
+    NormalizedTypeDefinitionAstNode,
+    normalizedTypeDefinitionAstNodeParser,
     LibraryAstNode,
     libraryAstNodeParser,
     GenericTypeConstructorAstNode,
@@ -164,8 +164,10 @@ export const isLambdaConstructor = (
 export const isTermDefinition = (val: unknown): val is TermDefinitionAstNode =>
     termDefinitionAstNodeParser.safeParse(val).success;
 
-export const isTypeDefinition = (val: unknown): val is TypeDefinitionAstNode =>
-    typeDefinitionAstNodeParser.safeParse(val).success;
+export const isTypeDefinition = (
+    val: unknown,
+): val is NormalizedTypeDefinitionAstNode =>
+    normalizedTypeDefinitionAstNodeParser.safeParse(val).success;
 
 export const isLibrary = (val: unknown): val is LibraryAstNode =>
     libraryAstNodeParser.safeParse(val).success;
