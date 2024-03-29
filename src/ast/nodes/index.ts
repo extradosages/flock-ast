@@ -1,4 +1,5 @@
 export * from "./constructors";
+export * from "./deref";
 export * from "./parsers";
-export * from "./inline";
 export * from "./ref";
+export * from "./typeGuards";

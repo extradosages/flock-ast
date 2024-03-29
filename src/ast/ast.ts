@@ -1,10 +1,9 @@
+import { denormalize } from "./denormalize";
 import {
     AstNodeUnknown,
     AstNodeTypeUnknown,
     AstNodeRef,
     AstNode,
-    InlineResult,
-    inline,
 } from "./nodes";
 
 export class Ast {
@@ -30,11 +29,22 @@ export class Ast {
         return node as AstNode<AstNodeType>;
     };
 
-    inline = (value: unknown): InlineResult => {
-        return inline(this.deref, value);
+    denormalize = (value: unknown): unknown => {
+        return denormalize(this.deref, value);
     };
 
-    inlineAll = () => {
-        return this.nodes.map(this.inline);
+    denormalizeAll = () => {
+        return this.nodes.map(this.denormalize);
+    };
+
+    root = (): AstNodeUnknown => {
+        if (this.nodes.length === 0) {
+            throw new Error("No nodes");
+        }
+        return this.nodes.slice(-1)[0];
+    };
+
+    denormalizedRoot = (): unknown => {
+        return this.denormalize(this.root());
     };
 }

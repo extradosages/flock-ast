@@ -196,13 +196,13 @@ const astNodeTypeToDataParserRecord = {
             astNodeRefParser(termAstNodeTypeParser),
             astNodeRefParser(z.literal("clientImplementation")),
         ]),
-        type: astNodeRefParser(smallTypeAstNodeTypeParser),
+        type: astNodeRefParser(largeTypeAstNodeTypeParser),
     }),
     termReference: z.string(),
     typeBinding: z.string(),
     typeDefinition: z.object({
         binding: astNodeRefParser(z.literal("typeBinding")),
-        type: astNodeRefParser(smallTypeAstNodeTypeParser),
+        type: astNodeRefParser(largeTypeAstNodeTypeParser),
     }),
     typeReference: z.string(),
 } as const satisfies Record<AstNodeTypeUnknown, z.ZodType<unknown>>;
