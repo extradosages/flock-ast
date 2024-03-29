@@ -3,7 +3,6 @@ import { z } from "zod";
 import { Deref, astNodeRefUnknownParser } from "./nodes";
 
 export const denormalize = (deref: Deref, val: unknown): unknown => {
-    debugger;
     const refResult = astNodeRefUnknownParser.safeParse(val);
     if (refResult.success) {
         const astNode = deref(refResult.data);
